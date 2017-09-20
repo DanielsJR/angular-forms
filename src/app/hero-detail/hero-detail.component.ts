@@ -23,7 +23,7 @@ export class HeroDetailComponent implements OnChanges {
     this.heroForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]], // <--- the FormControl called "name"
       secretLairs: this.fb.array([]), // <-- secretLairs as an empty FormArray
-      power: '',
+      power: ['', Validators.required ],
       sidekick: ''
     });
   }
@@ -63,12 +63,6 @@ export class HeroDetailComponent implements OnChanges {
     );
   }
 
-  onSubmit() {
-    this.hero = this.prepareSaveHero();
-    this.heroService.updateHero(this.hero).subscribe(/* error handling */);
-    this.ngOnChanges();
-  }
-
   prepareSaveHero(): Hero {
     const formModel = this.heroForm.value;
 
@@ -88,6 +82,12 @@ export class HeroDetailComponent implements OnChanges {
       sidekick: formModel.sidekick as boolean
     };
     return saveHero;
+  }
+
+  onSubmit() {
+    this.hero = this.prepareSaveHero();
+    this.heroService.updateHero(this.hero).subscribe(/* error handling */);
+    this.ngOnChanges();
   }
 
   revert() {

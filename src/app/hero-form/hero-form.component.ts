@@ -5,7 +5,15 @@ import { Hero } from '../models/hero';
 @Component({
   selector: 'app-hero-form',
   templateUrl: './hero-form.component.html',
-  styles: []
+  styles: [`
+  .ng-valid[required], .ng-valid.required  {
+      border-left: 5px solid #42A948; /* green */
+  }
+
+  .ng-invalid:not(form)  {
+     border-left: 5px solid #a94442; /* red */
+  }
+`]
 })
 export class HeroFormComponent {
 
