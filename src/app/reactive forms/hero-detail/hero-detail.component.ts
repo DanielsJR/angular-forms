@@ -1,7 +1,7 @@
-import { HeroService } from '../hero.service';
+import { HeroService } from '../../hero.service';
 import { Component, Input, OnChanges } from '@angular/core';
 import { FormArray, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Address, Hero, states } from '../models/data-model';
+import { Address, Hero, states } from '../../models/data-model';
 
 @Component({
   selector: 'app-hero-detail',
@@ -14,6 +14,7 @@ export class HeroDetailComponent implements OnChanges {
   states = states;
   nameChangeLog: string[] = [];
 
+
   constructor(private fb: FormBuilder, private heroService: HeroService) { // <--- inject FormBuilder
     this.createForm();
     this.logNameChange();
@@ -23,7 +24,7 @@ export class HeroDetailComponent implements OnChanges {
     this.heroForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(4)]], // <--- the FormControl called "name"
       secretLairs: this.fb.array([]), // <-- secretLairs as an empty FormArray
-      power: ['', Validators.required ],
+      power: ['', Validators.required],
       sidekick: ''
     });
   }
@@ -35,6 +36,7 @@ export class HeroDetailComponent implements OnChanges {
       sidekick: this.hero.sidekick
     });
     this.setAddresses(this.hero.addresses);
+
   }
 
   get secretLairs(): FormArray {
@@ -53,6 +55,15 @@ export class HeroDetailComponent implements OnChanges {
 
   removeLair() {
     this.secretLairs.removeAt(this.secretLairs.length - 1);
+
+    const a1 = this.heroForm.get('secretLairs').value;
+    const a2 = this.hero.addresses;
+    if ((JSON.stringify(a1) !== JSON.stringify(a2))) {
+      this.heroForm.get('secretLairs').markAsDirty();
+    } else {
+      this.heroForm.get('secretLairs').markAsPristine();
+    }
+
   }
 
 
@@ -62,6 +73,8 @@ export class HeroDetailComponent implements OnChanges {
       (value: string) => this.nameChangeLog.push(value)
     );
   }
+
+
 
   prepareSaveHero(): Hero {
     const formModel = this.heroForm.value;

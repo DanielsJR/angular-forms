@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/finally';
 
-import { Hero } from '../models/data-model';
-import { HeroService } from '../hero.service';
+import { Hero } from '../../models/data-model';
+import { HeroService } from '../../hero.service';
 
 @Component({
   selector: 'app-hero-list',
