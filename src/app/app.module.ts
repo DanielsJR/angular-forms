@@ -1,3 +1,6 @@
+import { DynamicFormQuestionComponent } from './dymanic-forms/dynamic-form/dynamic-form-question.component';
+import { DynamicFormComponent } from './dymanic-forms/dynamic-form/dynamic-form.component';
+
 import { HeroListComponent } from './reactive forms/hero-list/hero-list.component';
 import { HeroDetailComponent } from './reactive forms/hero-detail/hero-detail.component';
 import { HeroService } from './hero.service';
@@ -12,6 +15,9 @@ import { HeroFormTemplateDrivenComponent } from './hero-form-template-driven/her
 
 
 
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,7 +26,9 @@ import { HeroFormTemplateDrivenComponent } from './hero-form-template-driven/her
     HeroFormTemplateDrivenComponent,
     ForbiddenValidatorDirective,
     HeroDetailComponent,
-    HeroListComponent
+    HeroListComponent,
+    DynamicFormComponent,
+    DynamicFormQuestionComponent
 
   ],
   imports: [
