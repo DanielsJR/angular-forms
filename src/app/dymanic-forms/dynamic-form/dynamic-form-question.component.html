@@ -1,14 +1,15 @@
-<div [formGroup]="form">
+<div [formGroup]="form" class="forInvalid">
   <label [attr.for]="question.key">{{question.label}}</label>
 
   <div [ngSwitch]="question.controlType">
 
     <div class="form-group">
-      <input class="form-control" *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type">
-    
+      <input *ngSwitchCase="'textbox'" [formControlName]="question.key" [id]="question.key" [type]="question.type" [required]="question.required"
+             [placeholder]="question.placeholder" [class]="question.class" [checked]="question.checked">
+      <!--"required" for CSS feedback -->
 
-    
-      <select class="form-control" *ngSwitchCase="'dropdown'" [formControlName]="question.key" [id]="question.key">
+      <select *ngSwitchCase="'dropdown'" [formControlName]="question.key" [id]="question.key" [required]="question.required"
+              [class]="question.class">
         <option *ngFor="let opt of question.options" [value]="opt.key">{{opt.value}}</option>
       </select>
     </div>

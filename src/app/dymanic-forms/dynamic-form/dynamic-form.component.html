@@ -1,6 +1,7 @@
 <div class="container">
   <h1 style="text-align:center">Dynamic Form</h1>
   <h3>Job Application for Heroes</h3>
+
   <form (ngSubmit)="onSubmit()" [formGroup]="form">
 
     <div *ngFor="let question of questions" class="form-row">
@@ -16,4 +17,9 @@
   <div *ngIf="payLoad" class="form-row">
     <strong>Saved the following values</strong><br>{{payLoad}}
   </div>
+
+  <div>
+    <strong>texbox 1 value: {{form.get('firstName').value}}</strong><br>
+    <strong>texbox 2 value: {{form.get('emailAddress').value}}</strong><br>
+    <strong>dropdown value: {{form.get('brave').value}}</strong><br>
 </div>

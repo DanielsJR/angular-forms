@@ -13,7 +13,7 @@
     </div>
 
     <div formArrayName="secretLairs" class="well well-lg">
-      <div *ngFor="let address of secretLairs.controls; let i=index" [formGroupName]="i" id=contenedor>
+      <div *ngFor="let address of secretLairs.controls; let i=index" [formGroupName]="i" class="forInvalid">
         <!-- The repeated address template -->
         <h4>Address #{{i + 1}}</h4>
         <div style="margin-left: 1em;">

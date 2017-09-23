@@ -1,26 +1,35 @@
 <div class="container">
-  <h1 style="text-align:center">Reactive Form</h1>
+  <h1 style="text-align:center">Reactive Form Validator</h1>
   <form [formGroup]="heroForm" #formDir="ngForm">
 
     <div [hidden]="formDir.submitted">
 
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input id="name" class="form-control" formControlName="name" required>
-        
+      <div class="form-group has-feedback" [class.has-error]="name.invalid" [class.has-success]="name.valid">
+        <label class="control-label" for="name">Name</label>
+        <input type="text" class="form-control" id="name" required formControlName="name">
+        <span class="glyphicon form-control-feedback" [class.glyphicon-remove]="name.invalid" [class.glyphicon-ok]="name.valid"></span>
+
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-            <div *ngIf="name.errors.required">Name is required.</div>
-            <div *ngIf="name.errors.minlength">Name must be at least 4 characters long.</div>
-            <div *ngIf="name.errors.forbiddenName">Name cannot be Bob.</div>
+          <div *ngIf="name.errors.required">Name is required.</div>
+          <div *ngIf="name.errors.whitespace">No space in blank.</div>
+          <div *ngIf="name.errors.minlength">Name must be at least 4 characters long.</div>
+          <div *ngIf="name.errors.nombreProhibido">Name cannot be Lukas.</div>
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="alterEgo">Alter Ego</label>
-        <input id="alterEgo" class="form-control" formControlName="alterEgo">
-      </div>
+      <div class="form-group has-feedback" [class.has-error]="alterEgo.invalid" [class.has-success]="alterEgo.valid">
+        <label class="control-label" for="alterEgo">Alter Ego</label>
+        <input type="text" class="form-control" id="alterEgo" required formControlName="alterEgo">
+        <span class="glyphicon form-control-feedback" [class.glyphicon-remove]="alterEgo.invalid" [class.glyphicon-ok]="alterEgo.valid"></span>
 
-      <div class="form-group">
+        <div *ngIf="alterEgo.invalid && (alterEgo.dirty || alterEgo.touched)" class="alert alert-danger">
+          <div *ngIf="alterEgo.errors.required">Alter Ego is required.</div>
+          <div *ngIf="alterEgo.errors.whitespace">No space in blank.</div>
+          <div *ngIf="alterEgo.errors.nombreProhibido">Alter Ego cannot be Lukas.</div>
+        </div>
+      </div>
+      .
+      <div class="form-group" [class.has-error]="power.invalid" [class.has-success]="power.valid">
         <label for="power">Hero Power</label>
         <select id="power" class="form-control" formControlName="power" required>
               <option *ngFor="let p of powers" [value]="p">{{p}}</option>
@@ -31,8 +40,14 @@
         </div>
       </div>
 
-      <button type="submit" class="btn btn-default" [disabled]="heroForm.invalid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="formDir.resetForm({})">Reset</button>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" formControlName="sidekick"> I have a sidekick.
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="heroForm.invalid">Submit</button>
+      <button type="button" class="btn btn-danger" (click)="formDir.resetForm({})">Reset</button>
     </div>
   </form>
 

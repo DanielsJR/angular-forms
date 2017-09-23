@@ -15,8 +15,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroFormTemplateDrivenComponent {
 
-  powers = ['Really Smart', 'Super Flexible', 'Weather Changer'];
-
-  hero = { name: 'Dr.', alterEgo: 'Dr. What', power: this.powers[0] };
+  powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
+  hero = { name: 'Dr.', alterEgo: 'Dr. What', power: this.powers[0], sidekick: false };
 
 }

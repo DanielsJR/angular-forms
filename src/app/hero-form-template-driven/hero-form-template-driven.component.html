@@ -1,14 +1,15 @@
 <div class="container">
 
-  <h1 style="text-align:center">Template-Driven Form</h1>
+  <h1 style="text-align:center">Template-Driven Form Validation</h1>
   <form #heroForm="ngForm">
     <div [hidden]="heroForm.submitted">
 
-      <div class="form-group">
-        <label for="name">Name</label>
-        <input id="name" name="name" class="form-control" required minlength="4"
-               forbiddenName="bob" [(ngModel)]="hero.name" #name="ngModel">
-               
+      <div class="form-group has-feedback" [class.has-error]="name.invalid" [class.has-success]="name.valid" #spy>
+        <label class="control-label" for="name">Name</label>{{spy.className}}
+        <input type="text" class="form-control" id="name" required minlength="4" forbiddenName="bob" name="name" [(ngModel)]="hero.name"
+          #name="ngModel">
+        <span class="glyphicon form-control-feedback" [class.glyphicon-remove]="name.invalid" [class.glyphicon-ok]="name.valid"></span>
+       
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
           <div *ngIf="name.errors.required">Name is required.</div>
           <div *ngIf="name.errors.minlength">Name must be at least 4 characters long.</div>
@@ -16,24 +17,39 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="alterEgo">Alter Ego</label>
-        <input id="alterEgo" class="form-control" name="alterEgo" [(ngModel)]="hero.alterEgo">
+
+      <div class="form-group has-feedback" [class.has-error]="alterEgo.invalid" [class.has-success]="alterEgo.valid">
+        <label class="control-label" for="alterEgo">Alter Ego</label>
+        <input type="text" class="form-control" id="alterEgo" required minlength="4" forbiddenName="bob" name="alterEgo" [(ngModel)]="hero.alterEgo"
+          #alterEgo="ngModel">
+        <span class="glyphicon form-control-feedback" [class.glyphicon-remove]="alterEgo.invalid" [class.glyphicon-ok]="alterEgo.valid"></span>
+
+        <div *ngIf="alterEgo.invalid && (alterEgo.dirty || alterEgo.touched)" class="alert alert-danger">
+          <div *ngIf="alterEgo.errors.required">Alter Ego is required.</div>
+          <div *ngIf="alterEgo.errors.minlength">Alter Ego must be at least 4 characters long.</div>
+          <div *ngIf="alterEgo.errors.forbiddenName">Alter Ego cannot be Bob.</div>
+        </div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" [class.has-error]="power.invalid" [class.has-success]="power.valid">
         <label for="power">Hero Power</label>
         <select id="power" name="power" class="form-control" required [(ngModel)]="hero.power" #power="ngModel">
               <option *ngFor="let p of powers" [value]="p">{{p}}</option>
         </select>
-
+        
         <div *ngIf="power.errors && power.touched" class="alert alert-danger">
           <div *ngIf="power.errors.required">Power is required.</div>
         </div>
       </div>
 
-      <button type="submit" class="btn btn-default" [disabled]="heroForm.invalid">Submit</button>
-      <button type="button" class="btn btn-default" (click)="heroForm.resetForm({})">Reset</button>
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="sidekick" [(ngModel)]="hero.sidekick" #sidekick="ngModel"> I have a sidekick.
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary" [disabled]="heroForm.invalid">Submit</button>
+      <button type="button" class="btn btn-danger" (click)="heroForm.resetForm({})">Reset</button>
     </div>
 
     <div class="submitted-message" *ngIf="heroForm.submitted">
@@ -41,5 +57,5 @@
       <button (click)="heroForm.resetForm({})">Add new hero</button>
     </div>
   </form>
-
+  Form Value: {{ heroForm.value | json }}
 </div>

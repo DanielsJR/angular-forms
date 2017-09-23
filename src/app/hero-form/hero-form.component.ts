@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
 import { Hero } from '../models/hero';
+import { Component } from '@angular/core';
+
 
 
 @Component({
@@ -17,11 +18,9 @@ import { Hero } from '../models/hero';
 })
 export class HeroFormComponent {
 
-  powers = ['Really Smart', 'Super Flexible',
-    'Super Hot', 'Weather Changer'];
-
-  heroe = new Hero(18, 'Dr IQ', this.powers[0], 'Chuck Overstreet');
-
+  powers = ['Really Smart', 'Super Flexible', 'Super Hot', 'Weather Changer'];
+  hero = new Hero(18, 'Dr IQ', 'Sr Wise', this.powers[0], false);
+   // hero = { name: 'Dr.', alterEgo: 'Dr. What', power: this.powers[0], sidekick: false };
   submitted = false;
 
   onSubmit() {
@@ -29,6 +28,7 @@ export class HeroFormComponent {
   }
 
   newHero() {
-    this.heroe = new Hero(42, '', '');
+     // this.hero = { name: '', alterEgo: '', power: this.powers[0], sidekick: false };
+     this.hero = new Hero(42, '', '', '', false);
   }
 }
