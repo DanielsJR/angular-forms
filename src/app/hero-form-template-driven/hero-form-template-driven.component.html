@@ -9,11 +9,11 @@
         <input type="text" class="form-control" id="name" required minlength="4" forbiddenName="bob" name="name" [(ngModel)]="hero.name"
           #name="ngModel">
         <span class="glyphicon form-control-feedback" [class.glyphicon-remove]="name.invalid" [class.glyphicon-ok]="name.valid"></span>
-       
+
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-          <div *ngIf="name.errors.required">Name is required.</div>
-          <div *ngIf="name.errors.minlength">Name must be at least 4 characters long.</div>
-          <div *ngIf="name.errors.forbiddenName">Name cannot be Bob.</div>
+          <div *ngIf="name.hasError('required')">Name is <strong>required</strong>.</div>
+          <div *ngIf="name.hasError('minlength')">Name must be at least <strong>4</strong> characters long.</div>
+          <div *ngIf="name.hasError('forbiddenName')">Name cannot be <strong>Bob</strong>.</div>
         </div>
       </div>
 
@@ -25,9 +25,9 @@
         <span class="glyphicon form-control-feedback" [class.glyphicon-remove]="alterEgo.invalid" [class.glyphicon-ok]="alterEgo.valid"></span>
 
         <div *ngIf="alterEgo.invalid && (alterEgo.dirty || alterEgo.touched)" class="alert alert-danger">
-          <div *ngIf="alterEgo.errors.required">Alter Ego is required.</div>
-          <div *ngIf="alterEgo.errors.minlength">Alter Ego must be at least 4 characters long.</div>
-          <div *ngIf="alterEgo.errors.forbiddenName">Alter Ego cannot be Bob.</div>
+          <div *ngIf="alterEgo.hasError('required')">Alter Ego is <strong>required</strong>.</div>
+          <div *ngIf="alterEgo.hasError('minlength')">Alter Ego must be at least <strong>4</strong> characters long.</div>
+          <div *ngIf="alterEgo.hasError('forbiddenName')">Alter Ego cannot be <strong>Bob</strong>.</div>
         </div>
       </div>
 
@@ -36,9 +36,9 @@
         <select id="power" name="power" class="form-control" required [(ngModel)]="hero.power" #power="ngModel">
               <option *ngFor="let p of powers" [value]="p">{{p}}</option>
         </select>
-        
+
         <div *ngIf="power.errors && power.touched" class="alert alert-danger">
-          <div *ngIf="power.errors.required">Power is required.</div>
+          <div *ngIf="power.hasError('required')">Alter Ego is <strong>required</strong>.</div>
         </div>
       </div>
 

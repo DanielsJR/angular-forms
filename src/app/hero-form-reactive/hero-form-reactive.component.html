@@ -10,10 +10,10 @@
         <span class="glyphicon form-control-feedback" [class.glyphicon-remove]="name.invalid" [class.glyphicon-ok]="name.valid"></span>
 
         <div *ngIf="name.invalid && (name.dirty || name.touched)" class="alert alert-danger">
-          <div *ngIf="name.errors.required">Name is required.</div>
-          <div *ngIf="name.errors.whitespace">No space in blank.</div>
-          <div *ngIf="name.errors.minlength">Name must be at least 4 characters long.</div>
-          <div *ngIf="name.errors.nombreProhibido">Name cannot be Lukas.</div>
+          <div *ngIf="name.hasError('required')">Name is <strong>required</strong>.</div>
+          <div *ngIf="name.hasError('whitespace')">No space in <strong>blank</strong>.</div>
+          <div *ngIf="name.hasError('minlength')">Name must be at least <strong>4</strong> characters long.</div>
+          <div *ngIf="name.hasError('nombreProhibido')">Name cannot be <strong>Lukas</strong>.</div>
         </div>
       </div>
 
@@ -23,9 +23,9 @@
         <span class="glyphicon form-control-feedback" [class.glyphicon-remove]="alterEgo.invalid" [class.glyphicon-ok]="alterEgo.valid"></span>
 
         <div *ngIf="alterEgo.invalid && (alterEgo.dirty || alterEgo.touched)" class="alert alert-danger">
-          <div *ngIf="alterEgo.errors.required">Alter Ego is required.</div>
-          <div *ngIf="alterEgo.errors.whitespace">No space in blank.</div>
-          <div *ngIf="alterEgo.errors.nombreProhibido">Alter Ego cannot be Lukas.</div>
+          <div *ngIf="alterEgo.hasError('required')">Alter Ego is <strong>required</strong>.</div>
+          <div *ngIf="alterEgo.hasError('whitespace')">No space in <strong>blank</strong>.</div>
+          <div *ngIf="alterEgo.hasError('nombreProhibido')">Alter Ego cannot be <strong>Lukas</strong>.</div>
         </div>
       </div>
       .
@@ -36,7 +36,7 @@
         </select>
 
         <div *ngIf="power.invalid && power.touched" class="alert alert-danger">
-          <div *ngIf="power.errors.required">Power is required.</div>
+          <div *ngIf="power.hasError('required')">Power is <strong>required</strong>.</div>
         </div>
       </div>
 
